@@ -14,7 +14,7 @@ cask "batlog" do
   end
 
   name "batlog"
-  desc "Record your Mac's battery and per-app energy, and find out what drained it"
+  desc "Record battery and per-app energy, and find out what drained it"
   homepage "https://github.com/jufianto/batlog"
 
   livecheck do
@@ -23,10 +23,14 @@ cask "batlog" do
 
   binary "batlog"
 
+  preflight do
+    if OS.mac?
+      system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/batlog"]
+    end
+  end
+
   postflight do
     if OS.mac?
-      # Not notarized yet: clear the quarantine bit so Gatekeeper allows it.
-      system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/batlog"]
       # A recorder already installed (an upgrade, or a switch from another
       # install) is re-registered on the linked binary, so it runs this version.
       if File.exist?(File.expand_path("~/Library/LaunchAgents/dev.jufi.batlog.plist"))
@@ -34,7 +38,7 @@ cask "batlog" do
       end
     end
   end
-  generate_completions_from_executable "batlog", "completion",
+  generate_completions_from_executable "batlog",
     shell_parameter_format: :cobra,
     shells: [:bash, :zsh, :fish]
 
