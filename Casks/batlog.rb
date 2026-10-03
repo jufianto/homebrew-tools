@@ -9,15 +9,15 @@ cask "batlog" do
     end
   end
 
-  version "0.1.2"
+  version "0.2.0"
 
   on_macos do
     on_arm do
-      sha256 "b08580ea04bf58cf1d2ebbcf63506afea5b5dcc6dabd00b3dfd152e130d961ce"
+      sha256 "aea719b8514ed40aeafa2e44a2d4e2e61e30eec324be317cb319df439f882b63"
       url "https://github.com/jufianto/batlog/releases/download/v#{version}/batlog_#{version}_darwin_arm64.tar.gz"
     end
     on_intel do
-      sha256 "390aab90473b70988ff9b08753c7a6276be83bf9e7a567fb5d93623b1e7cf0fa"
+      sha256 "323c475dcfba00b15d0c45d85b278eefd03c827aa09ff3fe1a9d830a3c0abbec"
       url "https://github.com/jufianto/batlog/releases/download/v#{version}/batlog_#{version}_darwin_amd64.tar.gz"
     end
   end
